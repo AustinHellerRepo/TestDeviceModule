@@ -34,5 +34,6 @@ class ImplementedModule(Module):
 			_message = str(_iteration)
 			print("sending: \"" + _message + "\"")
 			self.get_send_method()(_message)
+			_iteration += 1
 		self.get_send_method()("ended")
 
