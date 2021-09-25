@@ -1,7 +1,7 @@
 from austin_heller_repo.socket import Module, start_thread, time
 
 
-class TestModule(Module):
+class ImplementedModule(Module):
 
 	def __init__(self):
 		super().__init__()
