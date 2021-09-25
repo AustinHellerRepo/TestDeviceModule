@@ -25,6 +25,9 @@ class ImplementedModule(Module):
 		self.__is_module_thread_running = False
 		self.__module_thread.join()
 
+	def get_purpose_guid(self) -> str:
+		return "091CEE3D-D683-4B31-ABCE-A0AC568FF14B"
+
 	def __thread_method(self):
 
 		self.get_send_method()("started")
