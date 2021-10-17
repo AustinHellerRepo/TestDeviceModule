@@ -4,12 +4,12 @@ from austin_heller_repo.module import Module, ModuleMessage
 
 class ImplementedModule(Module):
 
-	def __init__(self, *, device_guid: str, device_instance_guid: str, send_message_method, get_devices_by_purpose_method):
+	def __init__(self, *, device_guid: str, send_message_method, get_devices_by_purpose_method, on_ready_method):
 		super().__init__(
 			device_guid=device_guid,
-			device_instance_guid=device_instance_guid,
 			send_message_method=send_message_method,
-			get_devices_by_purpose_method=get_devices_by_purpose_method
+			get_devices_by_purpose_method=get_devices_by_purpose_method,
+			on_ready_method=on_ready_method
 		)
 
 		print("__init__")
@@ -17,7 +17,7 @@ class ImplementedModule(Module):
 		self.__is_module_thread_running = False
 		self.__module_thread = None
 
-	def receive(self, *, module_message: ModuleMessage):
+	def _receive(self, *, module_message: ModuleMessage):
 
 		_json_string = json.dumps(module_message.get_transmission_json())
 		print("received: \"" + _json_string + "\"")
@@ -36,6 +36,8 @@ class ImplementedModule(Module):
 		return "091CEE3D-D683-4B31-ABCE-A0AC568FF14B"
 
 	def __thread_method(self):
+
+		self._ready()
 
 		_queue_guid = "D5195218-61F6-4EDF-8675-ABB279BA92CD"
 
